@@ -2,35 +2,39 @@ package levelPieces;
 
 import gameEngine.Drawable;
 import gameEngine.InteractionResult;
-import gameEngine.Moveable;
 import levelPieces.GamePiece;
+import gameEngine.Moveable;
 
-public class Trooper extends GamePiece implements Moveable{
+public class PlinthDemolitionTeam extends GamePiece implements Moveable{
 	private InteractionResult state;
-	public Trooper(String label, int location) {
-		super('T', label, location);
+	private Plinth target;
+	public PlinthDemolitionTeam(String label, int location, Plinth target) {
+		super('D', label, location);
 		state = InteractionResult.NONE;
+		this.target = target;
 	}
-	
-	// moves the trooper one space closer to the player or one space away from the player
+
 	@Override
 	public void move(Drawable[] gameBoard, int playerLocation) {
 		gameBoard[this.getLocation()] = null;
-		if (playerLocation > this.getLocation()) {
+		if(this.target.getLocation() > this.getLocation()) {
 			this.setLocation(this.getLocation()+1);
 		} else {
 			this.setLocation(this.getLocation()-1);
 		}
 		gameBoard[this.getLocation()] = this;
 	}
-
+	
 	@Override
 	public InteractionResult interact(Drawable[] gameBoard, int playerLocation) {
-		if (playerLocation == this.getLocation()) {
-			state = InteractionResult.HIT;
+		if (this.target.getLocation() == this.getLocation()) {
+			state = InteractionResult.NONE;
+			this.target.setDestroyed(true);
 		} else {
 			state = InteractionResult.NONE;
 		}
 		return state;
 	}
+
+	
 }

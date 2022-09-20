@@ -1,15 +1,15 @@
 package levelPieces;
 
 import gameEngine.Drawable;
+import gameEngine.GameEngine;
+
 import java.util.ArrayList;
 import gameEngine.Moveable;
-import levelPieces.GamePiece;
 import java.util.*;
 
 public class LevelSetup {
 	
-	private static final int boardSize = 10;
-	private Drawable[] board = new Drawable[boardSize];
+	private Drawable[] board = new Drawable[GameEngine.BOARD_SIZE];
 	ArrayList<GamePiece> pieces= new ArrayList<GamePiece>();
 	ArrayList<Moveable> moveables= new ArrayList<Moveable>();
 	
@@ -18,29 +18,38 @@ public class LevelSetup {
 	}
 	
 	public void createLevel(int levelNum) {
-		
-		// Prints out the legend for ease of use
-		System.out.println("Level " + levelNum + " Legend:");
-		System.out.println("P - Player");
-		System.out.println("H - Healer");
-		System.out.println("M - Magician");
-		System.out.println("T - Trooper");
-		System.out.println("S - Supreme Leader");
-		System.out.println("L - Plinth");
-		System.out.println();
-		
+
 		switch (levelNum) {
 			case 1:
-				pieces.add(new Trooper("Dave", new Random().nextInt(3-2+1)+2));
-				pieces.add(new Plinth("David"));
-				pieces.add(new SupremeLeader("Daverino", 9));
+				System.out.println("Level " + levelNum + " Legend:");
+				Plinth p = new Plinth("Plinth");
+				PlinthDemolitionTeam pdt = new PlinthDemolitionTeam("Plinth Demolition Team", GameEngine.BOARD_SIZE - 2, p);
+				Trooper t = new Trooper("Trooper", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2);
+				
+				pieces.add(t);
+				moveables.add(t);
+				pieces.add(p);
+				pieces.add(pdt);
+				moveables.add(pdt);
+				
+				// Prints out the legend for ease of use
 				this.updateBoard();
+				for (GamePiece piece: pieces) {
+					System.out.println(piece);
+				}
+				System.out.println();
 				break;
 			case 2:
-				System.out.println("Level 2");
+				pieces.add(new Trooper("Dave", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2));
+				pieces.add(new Plinth("David"));
+				pieces.add(new SupremeLeader("Daverino", GameEngine.BOARD_SIZE-1));
+				this.updateBoard();
 				break;
 			default: 
-				System.out.println("Ayudame");
+				pieces.add(new Trooper("Dave", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2));
+				pieces.add(new Plinth("David"));
+				pieces.add(new SupremeLeader("Daverino", GameEngine.BOARD_SIZE-1));
+				this.updateBoard();
 				break;
 		}
 		
@@ -63,7 +72,7 @@ public class LevelSetup {
 	}
 	
 	public void updateBoard() {
-		for(int i=0; i<boardSize; i++) {
+		for(int i=0; i<GameEngine.BOARD_SIZE; i++) {
 			board[i] = null;
 		}
 		for(GamePiece gamePiece: pieces) {
