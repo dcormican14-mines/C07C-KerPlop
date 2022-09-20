@@ -12,21 +12,26 @@ public class Magician extends GamePiece implements Moveable{
 		state = InteractionResult.NONE;
 	}
 	
-	// moves the trooper one space closer to the player or one space away from the player
 	@Override
 	public void move(Drawable[] gameBoard, int playerLocation) {
+		gameBoard[this.getLocation()] = null;
 		if (playerLocation > this.getLocation()) {
 			this.setLocation(this.getLocation()+1);
 		} else {
 			this.setLocation(this.getLocation()-1);
 		}
+		gameBoard[this.getLocation()] = this;
 	}
 
 	@Override
+	//this guy flames you with fire balls if you get too close
 	public InteractionResult interact(Drawable[] gameBoard, int playerLocation) {
 		if (playerLocation == this.getLocation()) {
+			state = InteractionResult.KILL;
+		} else if (Math.abs(this.getLocation()- playerLocation) <=2) {
 			state = InteractionResult.HIT;
-		} else {
+		}
+		else {
 			state = InteractionResult.NONE;
 		}
 		return state;

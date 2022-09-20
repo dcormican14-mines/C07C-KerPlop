@@ -25,13 +25,15 @@ public class LevelSetup {
 				Plinth p = new Plinth("Plinth");
 				PlinthDemolitionTeam pdt = new PlinthDemolitionTeam("Plinth Demolition Team", GameEngine.BOARD_SIZE - 2, p);
 				Trooper t = new Trooper("Trooper", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2);
-				
+				Magician m = new Magician("Houdini",GameEngine.BOARD_SIZE/2 );
+
 				pieces.add(t);
 				moveables.add(t);
 				pieces.add(p);
 				pieces.add(pdt);
 				moveables.add(pdt);
-				
+				pieces.add(m);
+				moveables.add(m);
 				// Prints out the legend for ease of use
 				this.updateBoard();
 				for (GamePiece piece: pieces) {
