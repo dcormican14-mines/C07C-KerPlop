@@ -40,15 +40,26 @@ public class LevelSetup {
 				System.out.println();
 				break;
 			case 2:
-				pieces.add(new Trooper("Dave", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2));
-				pieces.add(new Plinth("David"));
-				pieces.add(new SupremeLeader("Daverino", GameEngine.BOARD_SIZE-1));
+				System.out.println("Level " + levelNum + " Legend:");
+				Plinth p2 = new Plinth("Plinth");
+				PlinthDemolitionTeam pdt2 = new PlinthDemolitionTeam("Plinth Demolition Team", GameEngine.BOARD_SIZE - 2, p2);
+				Trooper t2 = new Trooper("Trooper", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2);
+				Trooper t3 = new Trooper("Trooper", t2.getLocation()+1 + GameEngine.BOARD_SIZE/2);
+				
+				// Prints out the legend for ease of use
 				this.updateBoard();
+				for (GamePiece piece: pieces) {
+					System.out.println(piece);
+				}
+				System.out.println();
 				break;
 			default: 
-				pieces.add(new Trooper("Dave", new Random().nextInt(GameEngine.BOARD_SIZE-2 - GameEngine.BOARD_SIZE/2 +1) + GameEngine.BOARD_SIZE/2));
-				pieces.add(new Plinth("David"));
-				pieces.add(new SupremeLeader("Daverino", GameEngine.BOARD_SIZE-1));
+				System.out.println("Level " + levelNum + " Legend:");
+				Plinth p3 = new Plinth("Plinth");
+				Plinth p4 = new Plinth("Plinth");
+				PlinthDemolitionTeam pdt3 = new PlinthDemolitionTeam("Plinth Demolition Team", GameEngine.BOARD_SIZE - 2, p3);
+				PlinthDemolitionTeam pdt4 = new PlinthDemolitionTeam("Plinth Demolition Team", GameEngine.BOARD_SIZE - 2, p4);
+				SupremeLeader sl = new SupremeLeader("Supreme Leader", GameEngine.BOARD_SIZE);
 				this.updateBoard();
 				break;
 		}
