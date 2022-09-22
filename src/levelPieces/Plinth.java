@@ -26,5 +26,9 @@ public class Plinth extends GamePiece{
 	public void setDestroyed(boolean condition) {
 		this.destroyed = condition;
 	}
+	
+	public boolean isDestroyed() {
+		return this.destroyed;
+	}
 
 }

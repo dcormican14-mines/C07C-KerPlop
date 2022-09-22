@@ -1,15 +1,8 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import gameEngine.Drawable;
-import gameEngine.GameEngine;
-import gameEngine.InteractionResult;
-import levelPieces.Magician;
-import levelPieces.Plinth;
-import levelPieces.PlinthDemolitionTeam;
-import levelPieces.Trooper;
-import levelPieces.SupremeLeader;
-import gameEngine.Player;
+import gameEngine.*;
+import levelPieces.*;
 
 public class TestMovingPieces {
 	@Test
